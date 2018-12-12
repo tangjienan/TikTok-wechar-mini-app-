@@ -46,18 +46,20 @@ Page({
         if (res.data.status == 200) {
           var userInfo = res.data.data;
           var faceUrl = "../resource/images/noneface.png";
-          if (userInfo.faceImage != null && userInfo.faceImage != '' && userInfo.faceImage != undefined) {
-            faceUrl = serverUrl + userInfo.faceImage;
+          console.log(userInfo.faceimage)
+          if (userInfo.faceimage != null && userInfo.faceimage != '' && userInfo.faceimage != undefined) {
+            faceUrl = serverUrl + userInfo.faceimage;
           }
-
-
+          
+          console.log(serverUrl)
+          console.log(faceUrl)
           me.setData({
             faceUrl: faceUrl,
-            fansCounts: userInfo.fansCounts,
-            followCounts: userInfo.followCounts,
-            receiveLikeCounts: userInfo.receiveLikeCounts,
+            fansCounts: userInfo.followercount,
+            followCounts: userInfo.followcount,
+            receiveLikeCounts: userInfo.receivelikecount,
             nickname: userInfo.nickname,
-            isFollow: userInfo.follow
+            isFollow: true
           });
         } else if (res.data.status == 502) {
           wx.showToast({
@@ -74,7 +76,7 @@ Page({
       }
     })
 
-    me.getMyVideoList(1);
+    //me.getMyVideoList(1);
   },
   logout: function () {
     var user = app.userInfo;
