@@ -45,5 +45,10 @@ Page({
         }   
       })
     }
+  },
+  goLoginPage: function () {
+    wx.redirectTo({
+      url: '../userLogin/login',
+    })
   }
 })

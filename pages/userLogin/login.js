@@ -42,9 +42,7 @@ Page({
             });
             app.userInfo = res.data.data;
             // fixme 修改原有的全局对象为本地缓存
-            app.setGlobalUserInfo(res.data.data);
             // 页面跳转
-
             var redirectUrl = me.redirectUrl;
             if (redirectUrl != null && redirectUrl != undefined && redirectUrl != '') {
               wx.redirectTo({
@@ -67,5 +65,10 @@ Page({
         }
       })
     }
+  },
+  goRegistPage: function () {
+    wx.redirectTo({
+      url: '../userRegist/regist',
+    })
   }
 })
