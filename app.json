@@ -17,5 +17,11 @@
     "navigationBarTitleText": "TikTok clone",
     "navigationBarTextStyle": "black"
   },
+  "networkTimeout": {
+    "request": 600000000,
+    "downloadFile": 600000000,
+    "uploadFile": 600000000,
+    "connectSocket": 600000000
+  },
   "debug": true
 }

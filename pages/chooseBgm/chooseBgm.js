@@ -97,6 +97,7 @@ Page({
         'headerUserToken': userInfo.userToken
       },
       success: function (res) {
+        console.log(res)
         var data = JSON.parse(res.data);
         wx.hideLoading();
         if (data.status == 200) {
@@ -123,7 +124,9 @@ Page({
             icon: "success"
           });
         }
-
+      },
+      complete: function (res) {
+        console.log(res)
       }
     })
   }
