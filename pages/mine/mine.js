@@ -153,7 +153,8 @@ Page({
         })
         var serverUrl = app.severUrl;
         // fixme 修改原有的全局对象为本地缓存
-        var userInfo = app.getGlobalUserInfo;
+        var userInfo = app.getGlobalUserInfo();
+        console.log(userInfo)
         wx.uploadFile({
           url: serverUrl + '/user/uploadFace?userId=' + userInfo.id,  //app.userInfo.id,
           filePath: tempFilePaths[0],

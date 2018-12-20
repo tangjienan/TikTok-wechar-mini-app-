@@ -12,7 +12,7 @@ Page({
     userLikeVideo: false,
     commentsPage: 1,
     commentsTotalPage: 1,
-    commentsList: [],
+    commentsList: ["dasdasd","DASDASDAS","dadasdasd"],
     placeholder: "说点什么...",
     publisherFace: "",
     publisher:{}
@@ -63,6 +63,8 @@ Page({
         });
       }
     })
+
+    me.getCommentsList(1);
   },
 
   onShow: function () {
@@ -285,7 +287,7 @@ Page({
         title: '请稍后...',
       })
       wx.request({
-        url: app.serverUrl + '/video/saveComment?fatherCommentId=' + fatherCommentId + "&toUserId=" + toUserId,
+        url: app.severUrl + '/video/saveComment?fatherCommentId=' + fatherCommentId + "&toUserId=" + toUserId,
         method: 'POST',
         header: {
           'content-type': 'application/json', // 默认值
@@ -322,7 +324,7 @@ Page({
     var videoId = me.data.videoInfo.id;
 
     wx.request({
-      url: app.serverUrl + '/video/getVideoComments?videoId=' + videoId + "&page=" + page + "&pageSize=5",
+      url: app.severUrl + '/video/getVideoComments?videoId=' + videoId + "&page=" + page + "&pageSize=5",
       method: "POST",
       success: function (res) {
         console.log(res.data);

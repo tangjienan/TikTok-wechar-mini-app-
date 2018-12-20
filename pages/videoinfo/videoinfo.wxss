@@ -1,4 +1,3 @@
-/* pages/videoinfo/videoinfo.wxss */
 page {
     height: 100%;
     background-color: #141414;
