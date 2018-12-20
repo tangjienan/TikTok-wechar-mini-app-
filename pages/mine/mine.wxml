@@ -1,33 +1,33 @@
-<!--pages/mine/mine.wxml-->
 <view>
 
   <view class='container'>
 
-   
+    <block wx:if="{{isMe}}">
       <image src="{{faceUrl}}" class="face" bindtap='changeFace'></image>
-    
-    <!-- <block wx:if="{{!isMe}}">
-      <image src="{{faceUrl}}" class="face"></image> -->
-    <!-- </block> -->
+    </block>
+    <block wx:if="{{!isMe}}">
+      <image src="{{faceUrl}}" class="face"></image>
+    </block>
     <label class='nickname'>{{nickname}}</label>
 
-    <!-- <block wx:if="{{isMe}}"> -->
-      <button size='mini' class='primary' bindtap='uploadVideo'> upload</button>
-      <button size='mini' type='' class='logout' bindtap='logout'>Logout</button>
-    <!-- </block> -->
-    <!-- <block wx:if="{{!isMe}}">
+    <block wx:if="{{isMe}}">
+      <button size='mini' class='primary' bindtap='uploadVideo'> upload </button>
+      <button size='mini' type='' class='logout' bindtap='logout'>log out</button>
+    </block>
+    <block wx:if="{{!isMe}}">
       <block wx:if="{{isFollow}}">
         <button size='mini' type='' class='follow' data-followType='0' bindtap='followMe'>followed</button>
       </block>
       <block wx:if="{{!isFollow}}">
         <button size='mini' type='primary' class='follow' data-followType='1' bindtap='followMe'>follow me</button>
       </block>
-    </block> -->
+
+    </block>
 
     <view class='container-row'>
-      <label class='info-items'>{{fansCounts}}fans</label>
-      <label class='info-items'>{{followCounts}} follow</label>
-      <label class='info-items'>{{receiveLikeCounts}} like</label>
+      <label class='info-items'>{{fansCounts}} fans</label>
+      <label class='info-items'>{{followCounts}} follows</label>
+      <label class='info-items'>{{receiveLikeCounts}} likes</label>
     </view>
   </view>
 
@@ -37,11 +37,11 @@
 
 <view class='container-video'>
     <!-- 发布过的作品 -->
-    <view class='{{videoSelClass}} {{isSelectedWork}}' bindtap='doSelectWork'>作品</view>
+    <view class='{{videoSelClass}} {{isSelectedWork}}' bindtap='doSelectWork'>videos</view>
     <!-- 收藏的点赞的视频 -->
-    <view class='{{videoSelClass}} {{isSelectedLike}}' bindtap='doSelectLike'>收藏</view>
+    <view class='{{videoSelClass}} {{isSelectedLike}}' bindtap='doSelectLike'>saved</view>
     <!-- 用户关注过人发表的视频 -->
-    <view class='{{videoSelClass}} {{isSelectedFollow}}' bindtap='doSelectFollow'>关注</view>
+    <view class='{{videoSelClass}} {{isSelectedFollow}}' bindtap='doSelectFollow'>follow</view>
 </view>
 
 <view class='container-video-list'>

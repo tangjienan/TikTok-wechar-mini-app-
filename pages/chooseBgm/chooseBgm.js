@@ -21,7 +21,7 @@ Page({
       title: '请等待...',
     });
     var serverUrl = app.severUrl;
-    var user = app.userInfo;
+    var user = app.getGlobalUserInfo;
     // 调用后端
 
     wx.request({
@@ -77,8 +77,8 @@ Page({
     })
     var serverUrl = app.severUrl;
     // fixme 修改原有的全局对象为本地缓存
-    //var userInfo = app.getGlobalUserInfo();
-    var userInfo = app.userInfo;
+    var userInfo = app.getGlobalUserInfo();
+    //var userInfo = app.userInfo;
     wx.uploadFile({
       url: serverUrl + '/video/upload',
       formData: {

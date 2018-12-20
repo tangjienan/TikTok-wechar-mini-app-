@@ -1,66 +1,81 @@
-// pages/report/report.js
+const app = getApp()
+
 Page({
-
-  /**
-   * Page initial data
-   */
   data: {
-
+    reasonType: "请选择原因",
+    reportReasonArray: app.reportReasonArray,
+    publishUserId: "",
+    videoId: ""
   },
 
-  /**
-   * Lifecycle function--Called when page load
-   */
-  onLoad: function (options) {
+  onLoad: function (params) {
+    var me = this;
 
+    var videoId = params.videoId;
+    var publishUserId = params.publishUserId;
+
+    me.setData({
+      publishUserId: publishUserId,
+      videoId: videoId
+    });
   },
 
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
+  changeMe: function (e) {
+    var me = this;
 
+    var index = e.detail.value;
+    var reasonType = app.reportReasonArray[index];
+
+    me.setData({
+      reasonType: reasonType
+    });
   },
 
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
+  submitReport: function (e) {
+    var me = this;
 
-  },
+    var reasonIndex = e.detail.value.reasonIndex;
+    var reasonContent = e.detail.value.reasonContent;
 
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
+    var user = app.getGlobalUserInfo();
+    var currentUserId = user.id;
+    if (reasonIndex == null || reasonIndex == '' || reasonIndex == undefined) {
+      wx.showToast({
+        title: '选择举报理由',
+        icon: "none"
+      })
+      return;
+    }
 
-  },
+    var serverUrl = app.severUrl;
+    wx.request({
+      url: serverUrl + '/user/reportUser',
+      method: 'POST',
+      data: {
+        dealUserId: me.data.publishUserId,
+        dealVideoId: me.data.videoId,
+        title: app.reportReasonArray[reasonIndex],
+        content: reasonContent,
+        userid: currentUserId
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'headerUserId': user.id,
+        'headerUserToken': user.userToken
+      },
+      success: function (res) {
+        wx.showToast({
+          title: res.data.msg,
+          duration: 2000,
+          icon: 'none',
+          success: function () {
+            wx.navigateBack();
+          }
+        })
+      }
 
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
+    })
 
   }
+
 })

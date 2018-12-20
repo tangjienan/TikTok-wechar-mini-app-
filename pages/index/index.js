@@ -8,7 +8,8 @@ Page({
     totalPage: 1,
     page: 1,
     videoList: [],
-    serverUrl: ""
+    serverUrl: "",
+    searchContent: ""
   },
 
   onLoad: function (params) {
@@ -32,6 +33,7 @@ Page({
     var page = me.data.page;
     me.getAllVideoList(page, isSaveRecord);
   },
+
   getAllVideoList: function (page, isSaveRecord) {
     var me = this;
     var serverUrl = app.severUrl;
@@ -96,6 +98,19 @@ Page({
     var page = currentPage + 1;
 
     me.getAllVideoList(page, 0);
+  },
+
+  showVideoInfo: function (e) {
+    var me = this;
+    var videoList = me.data.videoList;
+    var arrindex = e.target.dataset.arrindex;
+    var videoInfo = JSON.stringify(videoList[arrindex]);
+
+    wx.redirectTo({
+      url: '../videoinfo/videoinfo?videoInfo=' + videoInfo
+    })
   }
+
+
 
 })
